@@ -2,13 +2,13 @@
 import pika
 import time
 
-# Параметры подключения
+
 credentials = pika.PlainCredentials('admin', 'admin')
 parameters = pika.ConnectionParameters('localhost', 5672, '/', credentials)
 
 def callback(ch, method, properties, body):
     print(f" [x] Получено сообщение: {body.decode()}")
-    # Имитация обработки
+   
     dots_count = body.count(b'.')
     if dots_count:
         print(f"     Обработка {dots_count} секунд...")
