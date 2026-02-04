@@ -2,12 +2,12 @@
 
 echo "=== Настройка окружения для RabbitMQ задания ==="
 
-# 1. Установите RabbitMQ через Docker
+
 echo "Установка RabbitMQ через Docker..."
 sudo apt-get update
 sudo apt-get install -y docker.io
 
-# Запустите RabbitMQ контейнер
+
 sudo docker run -d \
   --name rabbitmq \
   -p 5672:5672 \
@@ -19,16 +19,16 @@ sudo docker run -d \
 echo "Ожидание запуска RabbitMQ..."
 sleep 15
 
-# 2. Создайте виртуальное окружение Python
+
 echo "Создание виртуального окружения Python..."
 python3 -m venv rabbitmq-env
 source rabbitmq-env/bin/activate
 
-# 3. Установите pika
+
 echo "Установка библиотеки pika..."
 pip install pika
 
-# 4. Создайте тестовые скрипты
+
 echo "Создание тестовых скриптов..."
 
 cat > producer.py << 'EOF'
@@ -36,7 +36,7 @@ cat > producer.py << 'EOF'
 import pika
 import sys
 
-# Параметры подключения
+
 credentials = pika.PlainCredentials('admin', 'admin')
 parameters = pika.ConnectionParameters('localhost', 5672, '/', credentials)
 
@@ -44,10 +44,10 @@ try:
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
     
-    # Создаем очередь
+    
     channel.queue_declare(queue='hello')
     
-    # Отправляем сообщение
+   
     message = ' '.join(sys.argv[1:]) or "Hello World!"
     channel.basic_publish(exchange='', routing_key='hello', body=message)
     print(f" [x] Sent '{message}'")
@@ -64,13 +64,13 @@ cat > consumer.py << 'EOF'
 import pika
 import time
 
-# Параметры подключения
+
 credentials = pika.PlainCredentials('admin', 'admin')
 parameters = pika.ConnectionParameters('localhost', 5672, '/', credentials)
 
 def callback(ch, method, properties, body):
     print(f" [x] Получено сообщение: {body.decode()}")
-    # Имитация обработки
+    
     dots_count = body.count(b'.')
     if dots_count:
         print(f"     Обработка {dots_count} секунд...")
@@ -135,22 +135,22 @@ def consumer():
     channel.start_consuming()
 
 if __name__ == "__main__":
-    # Запуск потребителя в отдельном потоке
+    
     consumer_thread = threading.Thread(target=consumer, daemon=True)
     consumer_thread.start()
     
-    # Даем время потребителю запуститься
+   
     time.sleep(2)
     
-    # Запуск производителя
+   
     producer()
     
-    # Ожидание завершения
+   
     time.sleep(3)
     print("\n [✓] Тест завершен!")
 EOF
 
-# 5. Сделайте скрипты исполняемыми
+
 chmod +x producer.py consumer.py test_multi.py
 
 echo ""
