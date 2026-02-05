@@ -24,6 +24,9 @@
 
 *Итогом выполнения домашнего задания будет приложенный скриншот веб-интерфейса RabbitMQ.*
 
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-install1.png)
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-interface.png)
+
 ---
 
 ### Задание 2. Отправка и получение сообщений
@@ -45,7 +48,12 @@ $ pip install pika
 
 Для закрепления материала можете попробовать модифицировать скрипты, чтобы поменять название очереди и отправляемое сообщение.
 
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-hello.png)
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-message-producer.png)
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-consumer.png)
+
 ---
+
 
 ### Задание 3. Подготовка HA кластера
 
@@ -79,6 +87,13 @@ $ rabbitmqadmin get queue='hello'
 После чего попробуйте отключить одну из нод, желательно ту, к которой подключались из скрипта, затем поправьте параметры подключения в скрипте consumer.py на вторую ноду и запустите его.
 
 *Приложите скриншот результата работы второго скрипта.*
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-install2.png)
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-install3.png)
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-install4.png)
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-install5.png)
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-cluster1.png)
+![rabbit](https://github.com/valdemar-2502/RabbitMQ-Queues-Homework/blob/main/rabbit-screen/rabbit-cluster2.png)
+
 
 
 ## Дополнительные задания (со звёздочкой*)
